@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MySqlConnector;
+using server.Repositories;
 using server.Repositorys;
 using server.Services;
 
@@ -63,7 +64,12 @@ public class Startup
         });
         
       services.AddScoped<IDbConnection>(x => CreateDbConnection());
-
+      services.AddTransient<KeepsService>();
+      services.AddTransient<KeepsRepository>();
+      services.AddTransient<VaultsRepository>();
+      services.AddTransient<VaultsService>();
+      services.AddTransient<VaultKeepsRepository>();
+      services.AddTransient<VaultKeepsService>();
       services.AddTransient<ProfilesService>();
       services.AddTransient<ProfilesRepository>();
     }

@@ -8,24 +8,27 @@ using server.Services;
 
 namespace server.Controllers
 {
-
     [ApiController]
     [Route("api/[controller]")]
-    public class KeepsController : ControllerBase
+    public class VaultsController : ControllerBase
     {
+
+        private readonly VaultsService _vservice;
+
         private readonly KeepsService _kservice;
 
-        public KeepsController(KeepsService kservice)
+        public VaultsController(VaultsService vservice, KeepsService kservice)
         {
+            _vservice = vservice;
             _kservice = kservice;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Keep>> GetAllKeeps()
+        public ActionResult<IEnumerable<Vault>> GetAllVaults()
         {
             try
             {
-                return Ok(_kservice.GetAllKeeps());
+                return Ok(_vservice.GetAllVaults());
             }
             catch (System.Exception err)
             {
@@ -34,11 +37,11 @@ namespace server.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Keep> GetOneKeep(int id)
+        public ActionResult<Vault> GetOneVault(int id)
         {
             try
             {
-                return Ok(_kservice.GetOneKeep(id));
+                return Ok(_vservice.GetOneVault(id));
             }
             catch (System.Exception err)
             {
@@ -48,14 +51,14 @@ namespace server.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Keep>> CreateOneKeep([FromBody] Keep newKeep)
+        public async Task<ActionResult<Vault>> CreateOneVault([FromBody] Vault newVault)
         {
             try
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-                newKeep.CreatorId = userInfo.Id;
-                newKeep.Creator = userInfo;
-                return Ok(_kservice.CreateOneKeep(newKeep));
+                newVault.CreatorId = userInfo.Id;
+                newVault.Creator = userInfo;
+                return Ok(_vservice.CreateOneVault(newVault));
             }
             catch (System.Exception err)
             {
@@ -65,16 +68,16 @@ namespace server.Controllers
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<ActionResult<Keep>> EditOneKeep(int id, [FromBody] Keep editKeep)
+        public async Task<ActionResult<Vault>> EditOneVault(int id, [FromBody] Vault editVault)
         {
             try
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-                editKeep.CreatorId = userInfo.Id;
-                editKeep.Id = id;
-                editKeep.Creator = userInfo;
-                _kservice.EditOneKeep(editKeep);
-                return Ok(editKeep);
+                editVault.CreatorId = userInfo.Id;
+                editVault.Id = id;
+                editVault.Creator = userInfo;
+                _vservice.EditOneVault(editVault);
+                return Ok(editVault);
             }
             catch (System.Exception err)
             {
@@ -84,18 +87,33 @@ namespace server.Controllers
 
         [HttpDelete("{id}")]
         [Authorize]
-        public async Task<ActionResult<Keep>> DeleteOneKeep(int id)
+        public async Task<ActionResult<Vault>> DeleteOne(int id)
         {
             try
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-               _kservice.DeleteOne(id, userInfo.Id);
-               return Ok("Deleted");
+                _vservice.DeleteOneVault(id, userInfo.Id);
+                return Ok("Deleted Vault");
             }
             catch (System.Exception err)
             {
                 return BadRequest(err.Message);
             }
         }
+
+        [HttpGet("{id}/keeps")]
+
+        public ActionResult<IEnumerable<VaultKeepViewModel>> GetKeepsByVaultId(int id)
+        {
+            try
+            {
+                return Ok(_kservice.GetKeepsByVaultId(id));
+            }
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);                
+            }
+        }
+
     }
 }

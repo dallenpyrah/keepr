@@ -78,6 +78,22 @@ namespace server.Repositories
             return _db.QueryFirstOrDefault<Keep>(sql, new { id });
         }
 
+        internal IEnumerable<Keep> GetKeepsByProfileId(string id)
+        {
+            string sql = @"
+            SELECT
+            keep.*,
+            profile.*
+            FROM keeps keep
+            JOIN profiles profile ON keep.creatorId = profile.id
+            WHERE keep.creatorId = @id;";
+            return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+            {
+                keep.Creator = profile;
+                return keep;
+            }, new { id }, splitOn: "id");
+        }
+
 
         //  This joins the keeps and profiles table to the vaultkeep table at the keepId and creatorId.
         //  Make sure in the future that you are joining the keeps to the vaultkeep table and not the vaultkeep table to the keeps.

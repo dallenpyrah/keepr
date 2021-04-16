@@ -71,6 +71,22 @@ namespace server.Repositories
             return _db.QueryFirstOrDefault<Vault>(sql, editVault);
         }
 
+        internal IEnumerable<Vault> GetVaultsByProfileId(string id)
+        {
+            string sql = @"
+            SELECT 
+            vault.*,
+            profile.*
+            FROM vaults vault
+            JOIN profiles profile ON vault.creatorId = profile.id
+            WHERE vault.creatorId = @id;";
+            return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+            {
+                vault.Creator = profile;
+                return vault;
+            }, new { id }, splitOn: "id");
+        }
+
         internal Vault DeleteOneVault(int id)
         {
             string sql = @"DELETE FROM vaults WHERE id = @id LIMIT 1;";

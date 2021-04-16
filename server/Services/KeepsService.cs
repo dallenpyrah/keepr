@@ -54,6 +54,12 @@ namespace server.Services
             editKeep.Shares = editKeep.Shares > 0 ? editKeep.Shares : current.Shares;
             return _krepo.EditOneKeep(editKeep);
         }
+
+        internal IEnumerable<Keep> GetKeepsByProfileId(string id)
+        {
+            return _krepo.GetKeepsByProfileId(id);
+        }
+
         internal Keep DeleteOne(int id, string userInfoId)
         {
             Keep current = GetOneKeep(id);

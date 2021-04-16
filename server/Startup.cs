@@ -68,6 +68,8 @@ public class Startup
       services.AddTransient<KeepsRepository>();
       services.AddTransient<VaultsRepository>();
       services.AddTransient<VaultsService>();
+      services.AddTransient<VaultKeepsRepository>();
+      services.AddTransient<VaultKeepsService>();
       services.AddTransient<ProfilesService>();
       services.AddTransient<ProfilesRepository>();
     }

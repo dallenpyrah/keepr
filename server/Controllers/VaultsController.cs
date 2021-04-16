@@ -15,9 +15,12 @@ namespace server.Controllers
 
         private readonly VaultsService _vservice;
 
-        public VaultsController(VaultsService vservice)
+        private readonly KeepsService _kservice;
+
+        public VaultsController(VaultsService vservice, KeepsService kservice)
         {
             _vservice = vservice;
+            _kservice = kservice;
         }
 
         [HttpGet]
@@ -92,10 +95,25 @@ namespace server.Controllers
                 _vservice.DeleteOneVault(id, userInfo.Id);
                 return Ok("Deleted Vault");
             }
-             catch (System.Exception err)
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }
+
+        [HttpGet("{id}/keeps")]
+
+        public ActionResult<IEnumerable<VaultKeepViewModel>> GetKeepsByVaultId(int id)
+        {
+            try
+            {
+                return Ok(_kservice.GetKeepsByVaultId(id));
+            }
+            catch (System.Exception err)
             {
                 return BadRequest(err.Message);                
             }
         }
+
     }
 }

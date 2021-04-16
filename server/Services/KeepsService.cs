@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using server.Models;
 using server.Repositories;
 
@@ -10,9 +11,12 @@ namespace server.Services
 
         private readonly KeepsRepository _krepo;
 
-        public KeepsService(KeepsRepository krepo)
+        private readonly VaultsService _vservice;
+
+        public KeepsService(KeepsRepository krepo, VaultsService vservice)
         {
             _krepo = krepo;
+            _vservice = vservice;
         }
 
         internal IEnumerable<Keep> GetAllKeeps()
@@ -60,6 +64,15 @@ namespace server.Services
                 throw new SystemException("You are no the owner of this keep, you do not have the permission to edit.");
             }
             return _krepo.DeleteOneKeep(id);
+        }
+
+        internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
+        {
+            var vault = _vservice.GetOneVault(id);
+            if(vault.IsPrivate != false){
+                throw new SystemException("This vault is private.");
+            }
+            return _krepo.GetKeepsByVaultId(id);
         }
     }
 }

@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace server.Models
 {
     public class Keep
@@ -5,10 +7,13 @@ namespace server.Models
         public int Id { get; set; }
         public string CreatorId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
+        [Required]
         public string Img { get; set; }
 
         public int Views { get; set; }

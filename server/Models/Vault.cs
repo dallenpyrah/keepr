@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace server.Models
 {
     public class Vault
@@ -6,8 +8,10 @@ namespace server.Models
 
             public string CreatorId { get; set; }
 
+            [Required]
             public string Name { get; set; }
 
+            [Required]
             public string Description { get; set; }
 
             public bool IsPrivate { get; set; }

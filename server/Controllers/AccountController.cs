@@ -16,9 +16,12 @@ namespace server.Controllers
     {
         private readonly ProfilesService _ps;
 
-        public AccountController(ProfilesService ps)
+        private readonly KeepsService _kservice;
+
+        public AccountController(ProfilesService ps, KeepsService kservice)
         {
             _ps = ps;
+            _kservice = kservice;
         }
 
         [HttpGet]

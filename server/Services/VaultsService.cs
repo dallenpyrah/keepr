@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using server.Models;
 using server.Repositories;
 
@@ -26,7 +27,8 @@ namespace server.Services
             {
                 throw new SystemException("Invalid Id: This vault does not exist or the wrong Id was passed in the get one request.");
             }
-            if(vault.IsPrivate == true){
+            if (vault.IsPrivate == true)
+            {
                 throw new SystemException("This vault is private.");
             }
             return vault;
@@ -45,7 +47,8 @@ namespace server.Services
             {
                 throw new SystemException("Invalid Id: This vault does not exist or the wrong Id was passed in the put request.");
             }
-            if(current.CreatorId != editVault.CreatorId){
+            if (current.CreatorId != editVault.CreatorId)
+            {
                 throw new SystemException("You are not the creator of this vault therefore you do not have permission to edit this.");
             }
             editVault.Description = editVault.Description != null ? editVault.Description : current.Description;
@@ -54,13 +57,22 @@ namespace server.Services
             return _vrepo.EditOneVault(editVault);
         }
 
+        internal IEnumerable<Vault> GetVaultsByProfileId(string id)
+        {
+                // return _vrepo.GetVaultsByProfileId(id);
+                IEnumerable<Vault> vaults = _vrepo.GetVaultsByProfileId(id);
+                return vaults.ToList().FindAll(v => v.IsPrivate == false);
+        }
+
         internal Vault DeleteOneVault(int id, string userInfoId)
         {
             Vault current = GetOneVault(id);
-            if(current == null){
+            if (current == null)
+            {
                 throw new SystemException("Invalid Id: This vault does not exist or the wrong Id was passed in the delete request.");
             }
-            if(current.CreatorId != userInfoId){
+            if (current.CreatorId != userInfoId)
+            {
                 throw new SystemException("You are not the creator of this vault therefore you do not have permission to delete this.");
             }
             return _vrepo.DeleteOneVault(id);

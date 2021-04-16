@@ -66,6 +66,8 @@ public class Startup
       services.AddScoped<IDbConnection>(x => CreateDbConnection());
       services.AddTransient<KeepsService>();
       services.AddTransient<KeepsRepository>();
+      services.AddTransient<VaultsRepository>();
+      services.AddTransient<VaultsService>();
       services.AddTransient<ProfilesService>();
       services.AddTransient<ProfilesRepository>();
     }

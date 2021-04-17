@@ -85,6 +85,7 @@ export default {
 }
 .keep:hover{
   transform: translateY(-10px);
+  cursor: pointer;
 }
 .keep{
   transition: all .3s;

@@ -78,7 +78,12 @@
                   </div>
                   <div class="col-4">
                     <div class="card-img-top">
-                      <img class="img-fluid w-25 rounded" :src="keepProp.creator.picture">
+                      <img class="img-fluid keep w-25 rounded"
+                           data-dismiss="modal"
+                           aria-label="Close"
+                           @click="toProfilePage"
+                           :src="keepProp.creator.picture"
+                      >
                       {{ keepProp.name }}
                     </div>
                   </div>
@@ -97,6 +102,8 @@ import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
 import VaultDropDown from './VaultDropDown.vue'
 import { keepsService } from '../services/KeepsService'
+import Swal from 'sweetalert2'
+import router from '../router'
 export default {
   components: { VaultDropDown },
   name: 'KeepDetailsModal',
@@ -113,7 +120,27 @@ export default {
     return {
       state,
       async deleteKeep() {
-        await keepsService.deleteKeep(props.keepProp.id)
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            keepsService.deleteKeep(props.keepProp.id)
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
+      },
+      toProfilePage() {
+        router.push({ name: 'ProfilePage', params: { id: props.keepProp.creatorId } })
       }
     }
   }
@@ -124,5 +151,12 @@ export default {
 <style>
 .rounded{
   border-radius: .75rem!important;
+}
+.keep:hover{
+  transform: translateY(-10px);
+  cursor: pointer;
+}
+.keep{
+  transition: all .3s;
 }
 </style>

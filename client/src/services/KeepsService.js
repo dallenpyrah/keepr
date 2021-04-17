@@ -11,6 +11,11 @@ class KeepsService {
       logger.log(error)
     }
   }
+
+  async deleteKeep(id) {
+    await api.delete('api/keeps/' + id)
+    this.getAllKeeps()
+  }
 }
 
 export const keepsService = new KeepsService()

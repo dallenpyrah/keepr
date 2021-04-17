@@ -41,6 +41,50 @@
                 </p>
               </div>
             </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="row justify-content-around">
+                  <div v-if="state.user.isAuthenticated" class="col-4">
+                    <div class="dropdown open">
+                      <button class="btn btn-success dropdown-toggle"
+                              type="button"
+                              id="triggerId"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                      >
+                        ADD TO VAULT
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="triggerId">
+                        <vault-drop-down data-dismiss="modal"
+                                         aria-label="Close"
+                                         v-for="vault in state.profileVaults"
+                                         :key="vault.id"
+                                         :vault-prop="vault"
+                                         :keep-prop="keepProp"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" v-if="keepProp.creator && state.user.email == keepProp.creator.email">
+                    <i class="fa fa-trash icon-size"
+                       data-dismiss="modal"
+                       aria-label="Close"
+                       @click="deleteKeep"
+                       aria-hidden="true"
+                    ></i>
+                  </div>
+                  <div class="col-4" v-else>
+                  </div>
+                  <div class="col-4">
+                    <div class="card-img-top">
+                      <img class="img-fluid w-25 rounded" :src="keepProp.creator.picture">
+                      {{ keepProp.name }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -51,17 +95,26 @@
 <script>
 import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
+import VaultDropDown from './VaultDropDown.vue'
+import { keepsService } from '../services/KeepsService'
 export default {
+  components: { VaultDropDown },
   name: 'KeepDetailsModal',
   props: {
     keepProp: { type: Object, required: true }
   },
-  setup() {
+  setup(props) {
     const state = reactive({
-      activeKeep: computed(() => AppState.activeKeep)
+      user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
+      activeKeep: computed(() => AppState.activeKeep),
+      profileVaults: computed(() => AppState.profileVaults)
     })
     return {
-      state
+      state,
+      async deleteKeep() {
+        await keepsService.deleteKeep(props.keepProp.id)
+      }
     }
   }
 

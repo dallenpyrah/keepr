@@ -1,30 +1,31 @@
 <template>
-  <div class="card-container">
-    <div class="card">
+  <keep-details-modal :keep-prop="keepProp" />
+  <div class="card-container keep p-2">
+    <div class="card rounded">
       <img
-        class="card-img"
+        class="card-img rounded"
         :src="keepProp.img"
         alt="Card image"
       >
-      <div class="card-img-overlay"
-           :data-target="`#view-keep` + keepProp.id"
-           data-toggle="modal"
-           aria-hidden="true"
-      >
-        <div class="row justify-content-around mt-keep">
-          <div class="col-8 text-left">
-            <keep-details-modal :keep-prop="keepProp" />
+      <div class="card-img-overlay d-flex align-items-end mt-5">
+        <div class="card-img-overlay"
+             :data-target="`#view-keep` + keepProp.id"
+             data-toggle="modal"
+             aria-hidden="true"
+        >
+        </div>
+        <div class="row w-100 justify-content-beteween">
+          <div class="col-7 text-left text-light ">
             <h6 class="card-title keep-name">
               {{ keepProp.name }}
             </h6>
           </div>
-          <div class="col-2 text-right">
-            <i class="fa fa-user" aria-hidden="true" @click="toProfilePage"></i>
+          <div class="col-5 text-right">
+            <i class="fa fa-user fa-2x keep-height text-light" aria-hidden="true" @click="toProfilePage"></i>
           </div>
         </div>
       </div>
     </div>
-    <keep-details-modal :keep-prop="keepProp" />
   </div>
   <!-- <div class="col-3 text-white">
     <img
@@ -79,5 +80,13 @@ export default {
 </script>
 
 <style>
-
+.rounded{
+  border-radius: .75rem!important;
+}
+.keep:hover{
+  transform: translateY(-10px);
+}
+.keep{
+  transition: all .3s;
+}
 </style>

@@ -1,9 +1,7 @@
 <template>
   <div class="container-fluid">
-    <div class="row justify-content-around mt-5">
-      <div class="card-columns ml-5 mr-5 mb-5">
-        <keep-component v-for="keep in state.keeps" :key="keep.id" :keep-prop="keep" />
-      </div>
+    <div class="card-columns ml-4 mr-4 mt-5">
+      <keep-component class="p-4" v-for="keep in state.keeps" :key="keep.id" :keep-prop="keep" />
     </div>
   </div>
 </template>

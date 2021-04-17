@@ -1,5 +1,32 @@
 <template>
-  <div class="col-3 text-white">
+  <div class="card-container">
+    <div class="card">
+      <img
+        class="card-img"
+        :src="keepProp.img"
+        alt="Card image"
+      >
+      <div class="card-img-overlay"
+           :data-target="`#view-keep` + keepProp.id"
+           data-toggle="modal"
+           aria-hidden="true"
+      >
+        <div class="row justify-content-around mt-keep">
+          <div class="col-8 text-left">
+            <keep-details-modal :keep-prop="keepProp" />
+            <h6 class="card-title keep-name">
+              {{ keepProp.name }}
+            </h6>
+          </div>
+          <div class="col-2 text-right">
+            <i class="fa fa-user" aria-hidden="true" @click="toProfilePage"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <keep-details-modal :keep-prop="keepProp" />
+  </div>
+  <!-- <div class="col-3 text-white">
     <img
       class="card-img"
       :src="keepProp.img"
@@ -22,7 +49,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>

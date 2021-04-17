@@ -1,11 +1,8 @@
 <template>
   <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-12 text-center">
-        <h1>Homepage</h1>
-        <div class="row justify-content-center">
-          <keep-component v-for="keep in state.keeps" :key="keep.id" :keep-prop="keep" />
-        </div>
+    <div class="row justify-content-around mt-5">
+      <div class="card-columns ml-5 mr-5 mb-5">
+        <keep-component v-for="keep in state.keeps" :key="keep.id" :keep-prop="keep" />
       </div>
     </div>
   </div>
@@ -33,11 +30,8 @@ export default {
 
 <style scoped lang="scss">
 .home{
-  text-align: center;
-  user-select: none;
-  > img{
-    height: 200px;
-    width: 200px;
-  }
+  margin: 0;
+  padding: 0;
+  padding: 3% 0;;
 }
 </style>

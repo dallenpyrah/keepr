@@ -13,20 +13,32 @@ class KeepsService {
   }
 
   async deleteKeep(id) {
-    await api.delete('api/keeps/' + id)
-    this.getAllKeeps()
+    try {
+      await api.delete('api/keeps/' + id)
+      this.getAllKeeps()
+    } catch (error) {
+      logger.log(error)
+    }
   }
 
   async createKeep(newKeep) {
-    const res = await api.post('api/keeps', newKeep)
-    AppState.profileKeeps = [...AppState.profileKeeps, res.data]
+    try {
+      const res = await api.post('api/keeps', newKeep)
+      AppState.profileKeeps = [...AppState.profileKeeps, res.data]
+    } catch (error) {
+      logger.log(error)
+    }
   }
 
   async editKeepCount(id, editKeep) {
-    editKeep.keeps++
-    const res = await api.put('api/keeps/' + id, editKeep)
-    console.log(res.data)
-    AppState.profileKeeps = res.data
+    try {
+      editKeep.keeps++
+      const res = await api.put('api/keeps/' + id, editKeep)
+      console.log(res.data)
+      AppState.profileKeeps = res.data
+    } catch (error) {
+      logger.log(error)
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 <template>
   <keep-details-modal :keep-prop="keepProp" />
-  <div class="card-container keep" @click="getUserVaults">
+  <div class="card-container keep p-2" @click="getUserVaults">
     <div class="card rounded">
       <img
         class="card-img rounded"

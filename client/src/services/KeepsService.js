@@ -19,8 +19,7 @@ class KeepsService {
 
   async createKeep(newKeep) {
     const res = await api.post('api/keeps', newKeep)
-    console.log(res.data)
-    AppState.keeps = [...AppState.keeps, res.data]
+    AppState.profileKeeps = [...AppState.profileKeeps, res.data]
   }
 }
 

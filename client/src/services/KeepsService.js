@@ -21,6 +21,13 @@ class KeepsService {
     const res = await api.post('api/keeps', newKeep)
     AppState.profileKeeps = [...AppState.profileKeeps, res.data]
   }
+
+  async editKeepCount(id, editKeep) {
+    editKeep.keeps++
+    const res = await api.put('api/keeps/' + id, editKeep)
+    console.log(res.data)
+    AppState.profileKeeps = res.data
+  }
 }
 
 export const keepsService = new KeepsService()

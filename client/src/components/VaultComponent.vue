@@ -13,6 +13,7 @@
               <h6 class="keep-name text-dark text-left ml-3">
                 {{ vaultProp.name }}
               </h6>
+              <i class="fa fa-lock mt-1" v-if="vaultProp.isPrivate" aria-hidden="true"></i>
             </div>
           </div>
         </div>

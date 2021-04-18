@@ -27,7 +27,8 @@ namespace server.Services
         internal Keep GetOneKeep(int id)
         {
             Keep keep = _krepo.GetOneKeep(id);
-            if(keep == null){
+            if (keep == null)
+            {
                 throw new SystemException("Invalid Id: This keep does not exist or the wrong Id was passed in the get one request.");
             }
             return keep;
@@ -41,11 +42,21 @@ namespace server.Services
         internal Keep EditOneKeep(Keep editKeep)
         {
             Keep current = GetOneKeep(editKeep.Id);
-            if(editKeep == null){
+            if (editKeep == null)
+            {
                 throw new SystemException("Invalid Id: This keep does not exist or the wrong Id was passed in the edit request.");
             }
-            if(editKeep.CreatorId != current.CreatorId){
-                throw new SystemException("You are not the owner of this keep, you do not have permission to edit.");
+            if (editKeep.CreatorId != current.CreatorId)
+            {
+                if (editKeep.Keeps > 0)
+                {
+                    editKeep.Keeps = editKeep.Keeps > 0 ? editKeep.Keeps : current.Keeps;
+                }
+                else
+                {
+
+                    throw new SystemException("You are not the owner of this keep, you do not have permission to edit.");
+                }
             }
             editKeep.Description = editKeep.Description != null ? editKeep.Description : current.Description;
             editKeep.Img = editKeep.Img != null ? editKeep.Img : current.Img;
@@ -63,10 +74,12 @@ namespace server.Services
         internal Keep DeleteOne(int id, string userInfoId)
         {
             Keep current = GetOneKeep(id);
-            if(current == null){
+            if (current == null)
+            {
                 throw new SystemException("Invalid Id: This keep does not exist or the wrong Id was passed in the delete request.");
             }
-            if(current.CreatorId != userInfoId){
+            if (current.CreatorId != userInfoId)
+            {
                 throw new SystemException("You are no the owner of this keep, you do not have the permission to edit.");
             }
             return _krepo.DeleteOneKeep(id);
@@ -75,7 +88,8 @@ namespace server.Services
         internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
         {
             var vault = _vservice.GetOneVault(id);
-            if(vault.IsPrivate != false){
+            if (vault.IsPrivate != false)
+            {
                 throw new SystemException("This vault is private.");
             }
             return _krepo.GetKeepsByVaultId(id);

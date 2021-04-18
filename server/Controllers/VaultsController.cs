@@ -103,7 +103,7 @@ namespace server.Controllers
 
         [HttpGet("{id}/keeps")]
 
-        public ActionResult<IEnumerable<VaultKeepViewModel>> GetKeepsByVaultId(int id)
+        public ActionResult<IEnumerable<VaultKeepViewModel>> GetKeepsByVaultIdAsync(int id)
         {
             try
             {

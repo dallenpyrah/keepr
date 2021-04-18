@@ -72,7 +72,9 @@ export default {
     const router = useRouter()
     const state = reactive({
       account: computed(() => AppState.account),
-      user: computed(() => AppState.user)
+      user: computed(() => AppState.user),
+      homepage: computed(() => AppState.homepage),
+      vaultpage: computed(() => AppState.vaultpage)
     })
     return {
       state,

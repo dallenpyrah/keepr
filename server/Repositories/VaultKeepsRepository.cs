@@ -26,12 +26,6 @@ namespace server.Repositories
             return newVaultKeep;
         }
 
-        internal VaultKeep GetOneKeepById(int keepId)
-        {
-           string sql = @"SELECT * FROM vaultkeeps WHERE keepId = @keepId;";
-            return _db.QueryFirstOrDefault<VaultKeep>(sql, new { keepId });
-        }
-
         internal VaultKeep DeleteOne(int id)
         {
             string sql = "DELETE FROM vaultkeeps WHERE id = @id LIMIT 1;";

@@ -16,15 +16,8 @@ namespace server.Services
 
         internal VaultKeep CreateOne(VaultKeep newVaultKeep)
         {
-            VaultKeep current = _vkrepo.GetOneKeepById(newVaultKeep.KeepId);
-            if (current == null)
-            {
-                return _vkrepo.CreateOne(newVaultKeep);
-            }
-            else
-            {
-                throw new SystemException("Vault keep already exists");
-            }
+            return _vkrepo.CreateOne(newVaultKeep);
+
         }
 
         internal VaultKeep DeleteOne(int id, string userInfoId)

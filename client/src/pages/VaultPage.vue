@@ -31,7 +31,8 @@ export default {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       keeps: computed(() => AppState.vaultKeeps),
-      vault: computed(() => AppState.activeVault)
+      vault: computed(() => AppState.activeVault),
+      vaultpage: true
     })
     onMounted(() => vaultKeepsService.getKeepsByVaultId(route.params.id))
     onMounted(() => vaultsService.getVaultById(route.params.id))

@@ -27,9 +27,8 @@ namespace server.Services
             {
                 throw new SystemException("Invalid Id: This vault does not exist or the wrong Id was passed in the get one request.");
             }
-            if (vault.IsPrivate == true)
-            {
-                throw new SystemException("This vault is private.");
+            if(vault.IsPrivate){
+                throw new SystemException("You are not the owner of this vault.");
             }
             return vault;
         }

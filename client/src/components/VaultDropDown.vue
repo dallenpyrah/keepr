@@ -1,6 +1,6 @@
 <template>
   <button @click="addKeepToVault" class="dropdown-item" href="#">
-    {{ vaultProp.name }}
+    {{ vaultProp.name }}  <i class="fa fa-lock" v-if="vaultProp.isPrivate === true" aria-hidden="true"></i>
   </button>
 </template>
 

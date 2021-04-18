@@ -4,7 +4,7 @@
       <div class="col-12">
         {{ state.vault.name }}
         Keeps: {{ state.keeps.length }}
-        <i class="fa fa-trash" @click="deleteVault" aria-hidden="true"></i>
+        <i class="fa fa-trash" v-if="state.vault.creator && state.user.email == state.vault.creator.email" @click="deleteVault" aria-hidden="true"></i>
       </div>
     </div>
     <div class="card-columns">
@@ -28,6 +28,8 @@ export default {
   setup() {
     const route = useRoute()
     const state = reactive({
+      user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       keeps: computed(() => AppState.vaultKeeps),
       vault: computed(() => AppState.activeVault)
     })

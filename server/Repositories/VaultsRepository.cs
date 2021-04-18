@@ -51,9 +51,9 @@ namespace server.Repositories
         internal Vault CreateOneVault(Vault newVault)
         {
             string sql = @"INSERT INTO vaults
-            (name, description, isPrivate, creatorId)
+            (name, description, isPrivate, img, creatorId)
             VALUES
-            (@Name, @Description, @IsPrivate, @CreatorId);
+            (@Name, @Description, @IsPrivate, @Img, @CreatorId);
             SELECT LAST_INSERT_ID();";
             int id = _db.ExecuteScalar<int>(sql, newVault);
             newVault.Id = id;
@@ -66,6 +66,7 @@ namespace server.Repositories
             SET
                 name = @Name,
                 description = @Description,
+                img = @Img,
                 isPrivate = @IsPrivate
             WHERE id = @id;";
             return _db.QueryFirstOrDefault<Vault>(sql, editVault);

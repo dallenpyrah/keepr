@@ -67,7 +67,8 @@ namespace server.Repositories
                 SET 
                 name = @Name,
                 description = @Description,
-                img = @Img
+                img = @Img,
+                keeps = @Keeps
                 WHERE id = @id;";
             return _db.QueryFirstOrDefault<Keep>(sql, editKeep);
         }

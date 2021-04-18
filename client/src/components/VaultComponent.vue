@@ -1,0 +1,52 @@
+<template>
+  <div class="card-container p-3" @click="toVaultPage">
+    <div class="card rounded keep">
+      <img
+        class="card-img rounded"
+        :src="vaultProp.img"
+        alt="Card image"
+      >
+      <div class="card-img-overlay d-flex align-items-end">
+        <div class="row w-100 justify-content-between">
+          <div class="col-12 text-light">
+            <div class="row justify-content-between">
+              <h6 class="keep-name text-dark text-left ml-3">
+                {{ vaultProp.name }}
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+export default {
+  name: 'VaultComponenet',
+  props: {
+    vaultProp: { type: Object, required: true }
+  },
+  setup(props) {
+    const router = useRouter()
+    const state = reactive({
+    })
+    return {
+      state,
+      toVaultPage() {
+        router.push({
+          name: 'VaultPage',
+          params: { id: props.vaultProp.id }
+        })
+      }
+    }
+  }
+
+}
+</script>
+
+<style>
+
+</style>

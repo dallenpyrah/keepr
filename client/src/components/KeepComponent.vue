@@ -34,7 +34,6 @@ import { computed, reactive } from 'vue'
 import KeepDetailsModal from './KeepDetailsModal.vue'
 import { useRouter } from 'vue-router'
 import { AppState } from '../AppState'
-import { profilesService } from '../services/ProfilesService'
 import { accountService } from '../services/AccountService'
 export default {
   components: { KeepDetailsModal },
@@ -55,7 +54,7 @@ export default {
       },
       async getUserVaults() {
         accountService.getAccount()
-        profilesService.getUserVaults(AppState.account.id)
+        accountService.getAccountVaults(state.account.id)
       }
     }
   }

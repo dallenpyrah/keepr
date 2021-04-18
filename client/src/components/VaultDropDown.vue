@@ -8,6 +8,7 @@
 import { reactive } from 'vue'
 import { vaultKeepsService } from '../services/VaultKeepsService'
 import router from '../router'
+import { keepsService } from '../services/KeepsService'
 export default {
   name: 'VaultDropDown',
   props: {
@@ -22,6 +23,7 @@ export default {
       state,
       async addKeepToVault() {
         await vaultKeepsService.createVaultKeep({ vaultId: props.vaultProp.id, keepId: props.keepProp.id })
+        await keepsService.editKeepCount(props.keepProp.id, props.keepProp)
         router.push({ name: 'VaultPage', params: { id: props.vaultProp.id } })
       }
     }

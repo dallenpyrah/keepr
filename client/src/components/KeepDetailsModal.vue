@@ -44,8 +44,8 @@
             <div class="row">
               <div class="col-12">
                 <div class="row justify-content-around">
-                  <div v-if="state.user.isAuthenticated" class="col-4">
-                    <div class="dropdown open">
+                  <div v-if="state.user.isAuthenticated">
+                    <div class="dropdown">
                       <button class="btn btn-success dropdown-toggle"
                               type="button"
                               id="triggerId"
@@ -158,5 +158,9 @@ export default {
 }
 .keep{
   transition: all .3s;
+}
+.dropdown-menu {
+ overflow-y:auto;
+ max-height:80vh
 }
 </style>

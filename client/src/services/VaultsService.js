@@ -13,7 +13,7 @@ class VaultsService {
 
   async createVault(newVault) {
     const res = await api.post('api/vaults/', newVault)
-    AppState.vaults = [...AppState.vaults, res.data]
+    AppState.profileVaults = [...AppState.profileVaults, res.data]
   }
 }
 

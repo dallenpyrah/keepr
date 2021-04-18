@@ -91,7 +91,7 @@
 <script>
 import { reactive } from 'vue'
 import { vaultsService } from '../services/VaultsService'
-import { profilesService } from '../services/ProfilesService'
+import $ from 'jquery'
 export default {
   name: 'AddVaultModal',
   props: {
@@ -105,7 +105,8 @@ export default {
       state,
       async createVault() {
         await vaultsService.createVault(state.newVault)
-        await profilesService.getUserVaults(props.profileProp.id)
+        state.newVault = {}
+        $('#add-vault').modal('hide')
       }
     }
   }

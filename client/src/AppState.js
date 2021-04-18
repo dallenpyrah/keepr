@@ -12,5 +12,6 @@ export const AppState = reactive({
   profileKeeps: [],
   profileVaults: [],
   profileVaultKeeps: [],
-  vaultKeeps: []
+  vaultKeeps: [],
+  isLoading: true
 })

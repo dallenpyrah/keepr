@@ -57,9 +57,13 @@ namespace server.Services
             return _vrepo.EditOneVault(editVault);
         }
 
+        internal IEnumerable<Vault> GetVaultsByAccountId(string id)
+        {
+            return _vrepo.GetVaultsByProfileId(id);
+        }
+
         internal IEnumerable<Vault> GetVaultsByProfileId(string id)
         {
-                // return _vrepo.GetVaultsByProfileId(id);
                 IEnumerable<Vault> vaults = _vrepo.GetVaultsByProfileId(id);
                 return vaults.ToList().FindAll(v => v.IsPrivate == false);
         }

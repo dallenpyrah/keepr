@@ -1,5 +1,15 @@
 <template>
   <div v-if="state.isLoading === false" class="container-fluid">
+    <div class="row mt-4">
+      <div class="col-4">
+        <img class="img-fluid rounded" width="175" :src="state.account.picture" />
+      </div>
+      <div class="col-4">
+        <h4>{{ state.account.name }}</h4>
+        <h6>Vaults: {{ state.profileVaults.length }} </h6>
+        <h6>Keeps: {{ state.profileKeeps.length }} </h6>
+      </div>
+    </div>
     <div class="row">
       <div class="col-12">
         <h2 class="mt-5 mb-2">

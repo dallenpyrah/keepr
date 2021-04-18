@@ -21,11 +21,21 @@
       <span class="navbar-toggler-icon" />
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-      </ul>
-      <span class="navbar-text">
+      <div class="col-4 mr-auto ml-auto">
+        <form @submit.prevent="">
+          <div class="form-group mt-3">
+            <div class="input-group">
+              <input type="text" class="form-control form-control-lg border-right-0" placeholder="From" aria-label="from" aria-describedby="from">
+              <div class="input-group-append">
+                <span class="input-group-text bg-white"><i class="fa fa-search" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <span class="card p-2 bg-dark text-light rounded">
         <button
-          class="btn btn-outline-primary text-uppercase"
+          class="btn btn-outline-dark text-uppercase"
           @click="login"
           v-if="!user.isAuthenticated"
         >

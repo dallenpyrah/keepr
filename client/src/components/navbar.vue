@@ -22,16 +22,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">
-            Home
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
-            About
-          </router-link>
-        </li>
       </ul>
       <span class="navbar-text">
         <button
@@ -60,7 +50,7 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Account' }">
+            <router-link :to="{ name: 'ProfilePage', params: { id: state.account.id} }">
               <div class="list-group-item list-group-item-action hoverable">
                 Account
               </div>
@@ -86,6 +76,7 @@ export default {
   name: 'Navbar',
   setup() {
     const state = reactive({
+      account: computed(() => AppState.account),
       dropOpen: false
     })
     return {

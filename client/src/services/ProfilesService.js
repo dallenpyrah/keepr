@@ -15,6 +15,7 @@ class ProfilesService {
   async getUserVaults(id) {
     const res = await api.get(`api/profiles/${id}/vaults`)
     AppState.profileVaults = res.data
+    AppState.isLoading = false
   }
 }
 

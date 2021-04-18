@@ -18,10 +18,13 @@ namespace server.Controllers
 
         private readonly KeepsService _kservice;
 
-        public AccountController(ProfilesService ps, KeepsService kservice)
+        private readonly VaultsService _vservice;
+
+        public AccountController(ProfilesService ps, KeepsService kservice, VaultsService vservice)
         {
             _ps = ps;
             _kservice = kservice;
+            _vservice = vservice;
         }
 
         [HttpGet]
@@ -35,6 +38,20 @@ namespace server.Controllers
             catch (Exception e)
             {
                 return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("{id}/vaults")]
+        public async Task<ActionResult<IEnumerable<Vault>>> GetVaultsByAccountIdAsync()
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                return Ok(_vservice.GetVaultsByAccountId(userInfo.Id));
+            }
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);
             }
         }
     }

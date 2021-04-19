@@ -1,13 +1,13 @@
 <template>
   <div v-if="state.isLoading === false" class="container-fluid">
-    <div class="row mt-4">
-      <div v-if="state.profile.picture" class="col-4">
-        <img class="img-fluid rounded" width="175" :src="state.profile.picture" />
+    <div class="row mt-5">
+      <div v-if="state.profile.picture" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 col-xl-2 text-center">
+        <img class="img-fluid rounded image-size-profile" :src="state.profile.picture" />
       </div>
-      <div class="col-4">
-        <h4>{{ state.profile.name }}</h4>
-        <h6>Vaults: {{ state.profileVaults.length }} </h6>
-        <h6>Keeps: {{ state.profileKeeps.length }} </h6>
+      <div class="col-2">
+        <h3>{{ state.profile.name }}</h3>
+        <h3><span class="badge badge-success">Vaults</span> {{ state.profileVaults.length }} </h3>
+        <h3><span class="badge badge-dark">Keeps: </span> {{ state.profileKeeps.length }} </h3>
       </div>
     </div>
     <div class="row">

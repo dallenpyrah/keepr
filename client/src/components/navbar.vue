@@ -3,6 +3,7 @@
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <img
+          class="old-hover"
           alt="logo"
           src="../assets/img/K.png"
           height="50"

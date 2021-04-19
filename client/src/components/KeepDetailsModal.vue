@@ -45,8 +45,8 @@
               <div class="col-10 height-row">
                 <div class="row justify-content-center">
                   <div class="col-xs-2 col-sm-6 col-md-6 col-lg-4 col-xl-4" v-if="state.user.isAuthenticated">
-                    <div class="dropdown">
-                      <button class="btn btn-success btn-sm dropdown-toggle dropdown-text"
+                    <div class="dropdown dropup">
+                      <button class="btn btn-success btn-sm dropdown-toggle dropright dropdown-text"
                               type="button"
                               id="triggerId"
                               data-toggle="dropdown"
@@ -55,7 +55,7 @@
                       >
                         ADD TO VAULT
                       </button>
-                      <div class="dropdown-menu" aria-labelledby="triggerId">
+                      <div class="dropdown-menu view-height-dropdown" aria-labelledby="triggerId">
                         <vault-drop-down data-dismiss="modal"
                                          aria-label="Close"
                                          v-for="vault in state.profileVaults"
@@ -92,7 +92,7 @@
                            @click="toProfilePage"
                            :src="keepProp.creator.picture"
                       >
-                      {{ keepProp.name }}
+                      <span class="ml-3">{{ keepProp.name }}</span>
                     </div>
                   </div>
                 </div>

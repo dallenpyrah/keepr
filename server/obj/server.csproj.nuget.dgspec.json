@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\source\\codeworks\\keepr\\server\\server.csproj": {}
+    "C:\\source\\keepr\\server\\server.csproj": {}
   },
   "projects": {
-    "C:\\source\\codeworks\\keepr\\server\\server.csproj": {
+    "C:\\source\\keepr\\server\\server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\source\\codeworks\\keepr\\server\\server.csproj",
+        "projectUniqueName": "C:\\source\\keepr\\server\\server.csproj",
         "projectName": "server",
-        "projectPath": "C:\\source\\codeworks\\keepr\\server\\server.csproj",
+        "projectPath": "C:\\source\\keepr\\server\\server.csproj",
         "packagesPath": "C:\\Users\\imdal\\.nuget\\packages\\",
-        "outputPath": "C:\\source\\codeworks\\keepr\\server\\obj\\",
+        "outputPath": "C:\\source\\keepr\\server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\imdal\\AppData\\Roaming\\NuGet\\NuGet.Config"

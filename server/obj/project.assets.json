@@ -932,11 +932,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\source\\codeworks\\keepr\\server\\server.csproj",
+      "projectUniqueName": "C:\\source\\keepr\\server\\server.csproj",
       "projectName": "server",
-      "projectPath": "c:\\source\\codeworks\\keepr\\server\\server.csproj",
+      "projectPath": "C:\\source\\keepr\\server\\server.csproj",
       "packagesPath": "C:\\Users\\imdal\\.nuget\\packages\\",
-      "outputPath": "c:\\source\\codeworks\\keepr\\server\\obj\\",
+      "outputPath": "C:\\source\\keepr\\server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\imdal\\AppData\\Roaming\\NuGet\\NuGet.Config"

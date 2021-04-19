@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "X2Z1KyY0vdAUqQAPEUuThrQl2LlT28gB43yp9t2fED6wVuV+jw/Lb0SFaCMs5ztfShEn1pbeF502bCPk/baEUQ==",
+  "dgSpecHash": "5rnuMHRD+BEau/Xmr+q3P353HgGH6YhbQJ6LCyi7BrNG88D2E7i6zgZtTTqpHO67URBXlBV9hBtMrABiLfmO4g==",
   "success": true,
-  "projectFilePath": "C:\\source\\codeworks\\keepr\\server\\server.csproj",
+  "projectFilePath": "C:\\source\\keepr\\server\\server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\imdal\\.nuget\\packages\\codeworks.auth0provider\\1.0.3\\codeworks.auth0provider.1.0.3.nupkg.sha512",
     "C:\\Users\\imdal\\.nuget\\packages\\dapper\\2.0.78\\dapper.2.0.78.nupkg.sha512",

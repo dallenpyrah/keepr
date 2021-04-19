@@ -1,13 +1,13 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        {{ state.vault.name }}
+    <div class="row mt-4">
+      <div class="col-10 mb-5">
+        <h1>{{ state.vault.name }}</h1>
         Keeps: {{ state.keeps.length }}
         <i class="fa fa-trash" v-if="state.vault.creator && state.user.email == state.vault.creator.email" @click="deleteVault" aria-hidden="true"></i>
       </div>
     </div>
-    <div class="card-columns">
+    <div class="card-column">
       <keep-component v-for="keep in state.keeps" :key="keep.id" :keep-prop="keep" :vault-prop="state.vault" />
     </div>
   </div>

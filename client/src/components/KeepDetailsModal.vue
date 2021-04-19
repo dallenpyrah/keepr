@@ -143,8 +143,7 @@ export default {
       state,
       async deleteKeep() {
         Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
+          title: 'Are you sure you want to delete this keep?',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -155,7 +154,7 @@ export default {
             keepsService.deleteKeep(props.keepProp.id)
             Swal.fire(
               'Deleted!',
-              'Your file has been deleted.',
+              'Your keep has been deleted.',
               'success'
             )
           }
@@ -163,19 +162,18 @@ export default {
       },
       async deleteVaultKeep() {
         Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
+          title: 'Are you sure you want to remove this keep from your vault?',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
+          confirmButtonText: 'Yes, remove it!'
         }).then((result) => {
           if (result.isConfirmed) {
             vaultKeepsService.deleteVaultKeep(props.keepProp.vaultKeepId, props.vaultProp.id)
             Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
+              'Removed!',
+              'Your keep has been removed.',
               'success'
             )
           }

@@ -35,7 +35,7 @@
       </div>
       <span class="card p-2 bg-dark text-light rounded">
         <button
-          class="btn btn-outline-dark text-uppercase"
+          class="btn btn-outline-dark text-light text-uppercase"
           @click="login"
           v-if="!user.isAuthenticated"
         >

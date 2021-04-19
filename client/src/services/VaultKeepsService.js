@@ -15,10 +15,21 @@ class VaultKeepsService {
   async getKeepsByVaultId(id) {
     try {
       const res = await api.get(`api/vaults/${id}/keeps`)
+      console.log(res.data)
+      AppState.vaultPage = true
       AppState.vaultKeeps = res.data
       return res
     } catch (error) {
       logger.log(error)
+    }
+  }
+
+  async deleteVaultKeep(id, vaultId) {
+    try {
+      await api.delete(`api/vaultkeeps/${id}`)
+      this.getKeepsByVaultId(vaultId)
+    } catch (error) {
+
     }
   }
 }

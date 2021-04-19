@@ -12,7 +12,7 @@
           <div class="col-6">
             <img class="img-fluid m-4 rounded" :src="keepProp.img">
           </div>
-          <div class="col-6 text-center">
+          <div class="col-6 align-items-end text-center">
             <div class="row mt-4">
               <div class="col-11 text-right">
                 <i class="fa fa-times icon-size close" data-dismiss="modal" aria-label="Close"></i>
@@ -41,12 +41,12 @@
                 </p>
               </div>
             </div>
-            <div class="row">
-              <div class="col-12">
-                <div class="row justify-content-around">
-                  <div v-if="state.user.isAuthenticated">
+            <div class="row justify-content-center">
+              <div class="col-10 height-row">
+                <div class="row justify-content-center">
+                  <div class="col-xs-2 col-sm-6 col-md-6 col-lg-4 col-xl-4" v-if="state.user.isAuthenticated">
                     <div class="dropdown">
-                      <button class="btn btn-success dropdown-toggle"
+                      <button class="btn btn-success btn-sm dropdown-toggle dropdown-text"
                               type="button"
                               id="triggerId"
                               data-toggle="dropdown"
@@ -66,19 +66,27 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-4" v-if="keepProp.creator && state.user.email == keepProp.creator.email">
-                    <i class="fa fa-trash icon-size"
+                  <div class="col-xs-2 col-sm-6 col-md-6 col-lg-4 col-xl-4" v-if="keepProp.creator && state.user.email == keepProp.creator.email">
+                    <i v-if="state.vaultPage === false"
+                       class="fa fa-trash modal-delete"
                        data-dismiss="modal"
                        aria-label="Close"
                        @click="deleteKeep"
                        aria-hidden="true"
                     ></i>
+                    <i v-if="state.vaultPage === true"
+                       class="fa fa-trash modal-delete text-danger"
+                       data-dismiss="modal"
+                       aria-label="Close"
+                       @click="deleteVaultKeep"
+                       aria-hidden="true"
+                    ></i>
                   </div>
                   <div class="col-4" v-else>
                   </div>
-                  <div class="col-4">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
                     <div class="card-img-top">
-                      <img class="img-fluid keep w-25 rounded"
+                      <img class="img-fluid width-image keep rounded-image"
                            data-dismiss="modal"
                            aria-label="Close"
                            @click="toProfilePage"
@@ -104,18 +112,21 @@ import VaultDropDown from './VaultDropDown.vue'
 import { keepsService } from '../services/KeepsService'
 import Swal from 'sweetalert2'
 import router from '../router'
+import { vaultKeepsService } from '../services/VaultKeepsService'
 export default {
   components: { VaultDropDown },
   name: 'KeepDetailsModal',
   props: {
-    keepProp: { type: Object, required: true }
+    keepProp: { type: Object, required: true },
+    vaultProp: { type: Object }
   },
   setup(props) {
     const state = reactive({
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       activeKeep: computed(() => AppState.activeKeep),
-      profileVaults: computed(() => AppState.profileVaults)
+      profileVaults: computed(() => AppState.profileVaults),
+      vaultPage: computed(() => AppState.vaultPage)
     })
     return {
       state,
@@ -139,6 +150,26 @@ export default {
           }
         })
       },
+      async deleteVaultKeep() {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            vaultKeepsService.deleteVaultKeep(props.keepProp.vaultKeepId, props.vaultProp.id)
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
+      },
       toProfilePage() {
         router.push({ name: 'ProfilePage', params: { id: props.keepProp.creatorId } })
       }
@@ -151,6 +182,9 @@ export default {
 <style>
 .rounded{
   border-radius: .75rem!important;
+}
+.rounded-image{
+  border-radius: .5rem!important;
 }
 .keep:hover{
   transform: translateY(-10px);

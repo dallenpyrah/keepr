@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="card-columns">
-      <keep-component v-for="keep in state.keeps" :key="keep.id" :keep-prop="keep" />
+      <keep-component v-for="keep in state.keeps" :key="keep.id" :keep-prop="keep" :vault-prop="state.vault" />
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@
 <script>
 import { computed, onMounted, reactive } from 'vue'
 import { vaultKeepsService } from '../services/VaultKeepsService'
-import { useRoute } from 'vue-router'
+import { onBeforeRouteLeave, useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import KeepComponent from '../components/KeepComponent.vue'
 import { vaultsService } from '../services/VaultsService'
@@ -31,11 +31,14 @@ export default {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       keeps: computed(() => AppState.vaultKeeps),
-      vault: computed(() => AppState.activeVault),
-      vaultpage: true
+      vault: computed(() => AppState.activeVault)
     })
     onMounted(() => vaultKeepsService.getKeepsByVaultId(route.params.id))
     onMounted(() => vaultsService.getVaultById(route.params.id))
+    onBeforeRouteLeave((to, from, next) => {
+      AppState.vaultPage = false
+      next()
+    })
     return {
       state,
       route,
@@ -56,7 +59,7 @@ export default {
               'Your file has been deleted.',
               'success'
             )
-            router.push({ name: 'Home' })
+            router.push({ name: 'ProfilePage', params: { id: state.account.id } })
           }
         })
       }

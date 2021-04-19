@@ -27,7 +27,22 @@ namespace server.Services
             {
                 throw new SystemException("Invalid Id: This vault does not exist or the wrong Id was passed in the get one request.");
             }
-            if(vault.IsPrivate){
+            if (vault.IsPrivate)
+            {
+                throw new SystemException("You are not the owner of this vault.");
+            }
+            return vault;
+        }
+
+        internal Vault GetOneVault(int id, string userInfoId)
+        {
+            Vault vault = _vrepo.GetOneVault(id);
+            if (vault == null)
+            {
+                throw new SystemException("Invalid Id: This vault does not exist or the wrong Id was passed in the get one request.");
+            }
+            if (vault.IsPrivate && userInfoId != vault.CreatorId)
+            {
                 throw new SystemException("You are not the owner of this vault.");
             }
             return vault;
@@ -63,8 +78,8 @@ namespace server.Services
 
         internal IEnumerable<Vault> GetVaultsByProfileId(string id)
         {
-                IEnumerable<Vault> vaults = _vrepo.GetVaultsByProfileId(id);
-                return vaults.ToList().FindAll(v => v.IsPrivate == false);
+            IEnumerable<Vault> vaults = _vrepo.GetVaultsByProfileId(id);
+            return vaults.ToList().FindAll(v => v.IsPrivate == false);
         }
 
         internal Vault DeleteOneVault(int id, string userInfoId)

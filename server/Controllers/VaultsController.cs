@@ -37,10 +37,15 @@ namespace server.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Vault> GetOneVault(int id)
+        public async Task<ActionResult<Vault>> GetOneVault(int id)
         {
             try
             {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                if (userInfo != null)
+                {
+                    return Ok(_vservice.GetOneVault(id, userInfo.Id));
+                }
                 return Ok(_vservice.GetOneVault(id));
             }
             catch (System.Exception err)
@@ -103,15 +108,20 @@ namespace server.Controllers
 
         [HttpGet("{id}/keeps")]
 
-        public ActionResult<IEnumerable<VaultKeepViewModel>> GetKeepsByVaultIdAsync(int id)
+        public async Task<ActionResult<IEnumerable<VaultKeepViewModel>>> GetKeepsByVaultIdAsync(int id)
         {
             try
             {
-                return Ok(_kservice.GetKeepsByVaultId(id));
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                if (userInfo != null)
+                {
+                    return Ok(_kservice.GetKeepsByVaultId(id, userInfo.Id));
+                }
+                    return Ok(_kservice.GetKeepsByVaultId(id));
             }
             catch (System.Exception err)
             {
-                return BadRequest(err.Message);                
+                return BadRequest(err.Message);
             }
         }
 

@@ -1,11 +1,11 @@
 <template>
   <div v-if="state.isLoading === false" class="container-fluid">
     <div class="row mt-4">
-      <div v-if="state.account.picture" class="col-4">
-        <img class="img-fluid rounded" width="175" :src="state.account.picture" />
+      <div v-if="state.profile.picture" class="col-4">
+        <img class="img-fluid rounded" width="175" :src="state.profile.picture" />
       </div>
       <div class="col-4">
-        <h4>{{ state.account.name }}</h4>
+        <h4>{{ state.profile.name }}</h4>
         <h6>Vaults: {{ state.profileVaults.length }} </h6>
         <h6>Keeps: {{ state.profileKeeps.length }} </h6>
       </div>

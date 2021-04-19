@@ -1,11 +1,13 @@
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
+import { profilesService } from './ProfilesService'
 
 class KeepsService {
   async getAllKeeps() {
     try {
       const res = await api.get('api/keeps')
+      console.log(res.data)
       AppState.keeps = res.data
     } catch (error) {
       logger.log(error)
@@ -16,6 +18,7 @@ class KeepsService {
     try {
       await api.delete('api/keeps/' + id)
       this.getAllKeeps()
+      await profilesService.getUserKeeps(AppState.account.id)
     } catch (error) {
       logger.log(error)
     }

@@ -1,5 +1,6 @@
 <template>
-  <keep-details-modal :keep-prop="keepProp" />
+  <keep-details-modal v-if="vaultProp" :keep-prop="keepProp" :vault-prop="vaultProp" />
+  <keep-details-modal v-else :keep-prop="keepProp" />
   <div class="card-container keep" v-if="state.user.isAuthenticated" @click="getUserVaults">
     <div class="card rounded">
       <img
@@ -66,7 +67,8 @@ export default {
   components: { KeepDetailsModal },
   name: 'KeepComponent',
   props: {
-    keepProp: { type: Object, required: true }
+    keepProp: { type: Object, required: true },
+    vaultProp: { type: Object }
   },
   setup(props) {
     const router = useRouter()

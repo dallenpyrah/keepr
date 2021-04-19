@@ -30,7 +30,6 @@
                 <input
                   type="text"
                   name="title"
-                  id="title"
                   class="form-control"
                   placeholder="Enter title..."
                   aria-describedby="helpId"
@@ -42,7 +41,6 @@
                 <input
                   type="text"
                   name="img"
-                  id="img"
                   class="form-control"
                   placeholder="Enter URL..."
                   aria-describedby="helpId"
@@ -54,7 +52,6 @@
                 <input
                   type="text"
                   name="description"
-                  id="description"
                   class="form-control input-lg"
                   placeholder="Enter Description..."
                   aria-describedby="helpId"
@@ -65,7 +62,6 @@
                 <input
                   type="checkbox"
                   name="isPrivate"
-                  id="isPrivate"
                   class=""
                   placeholder="Private?"
                   aria-describedby="helpId"

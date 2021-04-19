@@ -22,7 +22,7 @@
                 <h6 class="keep-name text-left ml-3">
                   {{ keepProp.name }}
                 </h6>
-                <i class="fa fa-user icon-size text-right text-light hover-icon" aria-hidden="true" @click="toProfilePage"></i>
+                <i class="fa fa-user icon-size text-right text-light hover-icon" v-if="route.name == 'Home'" aria-hidden="true" @click="toProfilePage"></i>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
 <script>
 import { computed, reactive } from 'vue'
 import KeepDetailsModal from './KeepDetailsModal.vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { accountService } from '../services/AccountService'
 export default {
@@ -73,6 +73,7 @@ export default {
     vaultProp: { type: Object }
   },
   setup(props) {
+    const route = useRoute()
     const router = useRouter()
     const state = reactive({
       account: computed(() => AppState.account),
@@ -82,6 +83,7 @@ export default {
     })
     return {
       state,
+      route,
       toProfilePage() {
         router.push({ name: 'ProfilePage', params: { id: props.keepProp.creatorId } })
       },

@@ -12,7 +12,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <h2 class="mt-5 mb-2">
+        <h2 class="mt-5 mb-4 ml-4">
           Vaults <i class="fa fa-plus text-success" v-if="state.account.id == state.profile.id" data-target="#add-vault" data-toggle="modal" aria-hidden="true"></i>
         </h2>
         <add-vault-modal :profile-prop="state.profile" />
@@ -23,7 +23,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <h2 class="mt-5 mb-2">
+        <h2 class="mt-5 mb-5 ml-4">
           Keeps <i class="fa fa-plus text-success" v-if="state.account.id == state.profile.id" data-target="#add-keep" data-toggle="modal" aria-hidden="true"></i>
           <add-keep-modal />
         </h2>

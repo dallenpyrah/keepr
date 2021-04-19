@@ -45,7 +45,7 @@
               <div class="col-10 height-row">
                 <div class="row justify-content-center">
                   <div class="col-xs-2 col-sm-6 col-md-6 col-lg-4 col-xl-4" v-if="state.user.isAuthenticated">
-                    <div class="dropdown dropup">
+                    <div class="dropup dropup">
                       <button class="btn btn-success btn-sm dropdown-toggle dropright dropdown-text"
                               type="button"
                               id="triggerId"
@@ -84,7 +84,18 @@
                   </div>
                   <div class="col-4" v-else>
                   </div>
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                  <div v-if="state.user.isAuthenticated" class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                    <div v-if="keepProp.creator" class="card-img-top">
+                      <img class="img-fluid width-image keep rounded-image"
+                           data-dismiss="modal"
+                           aria-label="Close"
+                           @click="toProfilePage"
+                           :src="keepProp.creator.picture"
+                      >
+                      <span class="ml-3">{{ keepProp.name }}</span>
+                    </div>
+                  </div>
+                  <div v-else class="ml-5 col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
                     <div class="card-img-top">
                       <img class="img-fluid width-image keep rounded-image"
                            data-dismiss="modal"

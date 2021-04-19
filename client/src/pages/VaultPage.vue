@@ -1,14 +1,17 @@
 <template>
   <div class="container-fluid">
-    <div class="row mt-4">
-      <div class="col-10 mb-5">
-        <h1>{{ state.vault.name }}</h1>
-        Keeps: {{ state.keeps.length }}
-        <i class="fa fa-trash" v-if="state.vault.creator && state.user.email == state.vault.creator.email" @click="deleteVault" aria-hidden="true"></i>
+    <div class="row justify-content-center mt-4">
+      <div class="col-11 ml-5 mt-4 mb-5">
+        <h1>{{ state.vault.name }}  <i class="fa fa-trash text-danger ml-3" v-if="state.vault.creator && state.user.email == state.vault.creator.email" @click="deleteVault" aria-hidden="true"></i></h1>
+        <h4 class="mt-4">
+          <span class="badge badge-success">Keeps {{ state.keeps.length }}</span>
+        </h4>
       </div>
-    </div>
-    <div class="card-column">
-      <keep-component v-for="keep in state.keeps" :key="keep.id" :keep-prop="keep" :vault-prop="state.vault" />
+      <div class="col-11">
+        <div class="card-columns">
+          <keep-component v-for="keep in state.keeps" :key="keep.id" :keep-prop="keep" :vault-prop="state.vault" />
+        </div>
+      </div>
     </div>
   </div>
 </template>

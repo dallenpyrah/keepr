@@ -94,5 +94,15 @@ namespace server.Services
             }
             return _krepo.GetKeepsByVaultId(id);
         }
+
+        internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id, string userInfoId)
+        {
+            var vault = _vservice.GetOneVault(id, userInfoId);
+            if (vault.IsPrivate == true && userInfoId != vault.CreatorId)
+            {
+                throw new SystemException("This vault is private.");
+            }
+            return _krepo.GetKeepsByVaultId(id);
+        }
     }
 }

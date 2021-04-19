@@ -1,7 +1,7 @@
 <template>
   <div v-if="state.isLoading === false" class="container-fluid">
     <div class="row mt-4">
-      <div class="col-4">
+      <div v-if="state.account.picture" class="col-4">
         <img class="img-fluid rounded" width="175" :src="state.account.picture" />
       </div>
       <div class="col-4">

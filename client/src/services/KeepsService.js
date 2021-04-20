@@ -2,6 +2,7 @@ import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 import { profilesService } from './ProfilesService'
+import { vaultKeepsService } from './VaultKeepsService'
 
 class KeepsService {
   async getAllKeeps() {
@@ -14,11 +15,12 @@ class KeepsService {
     }
   }
 
-  async deleteKeep(id) {
+  async deleteKeep(id, vaultId) {
     try {
       await api.delete('api/keeps/' + id)
       this.getAllKeeps()
       await profilesService.getUserKeeps(AppState.account.id)
+      await vaultKeepsService.getKeepsByVaultId(vaultId)
     } catch (error) {
       logger.log(error)
     }

@@ -23,6 +23,7 @@
                   {{ keepProp.name }}
                 </h6>
                 <i class="fa fa-user icon-size text-right text-light hover-icon" v-if="route.name == 'Home'" aria-hidden="true" @click="toProfilePage"></i>
+                <i class="fa fa-times-circle-o icon-size text-right text-light danger hover-icon" v-if="route.name == 'VaultPage' " @click="deleteKeep" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -65,6 +66,7 @@ import KeepDetailsModal from './KeepDetailsModal.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { accountService } from '../services/AccountService'
+import { keepsService } from '../services/KeepsService'
 export default {
   components: { KeepDetailsModal },
   name: 'KeepComponent',
@@ -90,6 +92,9 @@ export default {
       async getUserVaults() {
         accountService.getAccount()
         accountService.getAccountVaults(state.account.id)
+      },
+      deleteKeep() {
+        keepsService.deleteKeep(props.keepProp.id, props.vaultProp.id)
       }
     }
   }
@@ -105,6 +110,13 @@ export default {
   cursor: pointer;
 }
 .keep{
+  transition: all .25s;
+}
+.danger:hover{
+  color: rgb(255, 80, 80);
+  cursor: pointer;
+}
+.danger{
   transition: all .25s;
 }
 </style>

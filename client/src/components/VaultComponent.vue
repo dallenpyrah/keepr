@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container p-3" @click="toVaultPage">
+  <div class="card-container" @click="toVaultPage">
     <div class="card rounded keep">
       <img
         class="card-img rounded"

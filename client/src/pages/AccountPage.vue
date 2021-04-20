@@ -2,7 +2,7 @@
   <div v-if="state.isLoading === false" class="container-fluid">
     <div class="row mt-5">
       <div v-if="state.profile.picture" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 col-xl-2 text-center">
-        <img class="img-fluid rounded image-size-profile" :src="state.profile.picture" />
+        <img class="img-fluid rounded image-size-profile animate__animated  animate__fadeIn" :src="state.profile.picture" />
       </div>
       <div class="col-2">
         <h3>{{ state.profile.name }}</h3>
@@ -13,7 +13,7 @@
     <div class="row">
       <div class="col-12">
         <h2 class="mt-5 mb-4 ml-4">
-          Vaults <i class="fa fa-plus text-success" v-if="state.account.id == state.profile.id" data-target="#add-vault" data-toggle="modal" aria-hidden="true"></i>
+          Vaults <i class="fa fa-plus  ml-3 text-secondary hover-icon" v-if="state.account.id == state.profile.id" data-target="#add-vault" data-toggle="modal" aria-hidden="true"></i>
         </h2>
         <add-vault-modal :profile-prop="state.profile" />
       </div>
@@ -24,7 +24,7 @@
     <div class="row">
       <div class="col-12">
         <h2 class="mt-5 mb-5 ml-4">
-          Keeps <i class="fa fa-plus text-success" v-if="state.account.id == state.profile.id" data-target="#add-keep" data-toggle="modal" aria-hidden="true"></i>
+          Keeps <i class="fa fa-plus  ml-3 text-secondary hover-icon" v-if="state.account.id == state.profile.id" data-target="#add-keep" data-toggle="modal" aria-hidden="true"></i>
           <add-keep-modal />
         </h2>
       </div>

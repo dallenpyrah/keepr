@@ -8,7 +8,6 @@ class KeepsService {
   async getAllKeeps() {
     try {
       const res = await api.get('api/keeps')
-      console.log(res.data)
       AppState.keeps = res.data
     } catch (error) {
       logger.log(error)
@@ -20,7 +19,7 @@ class KeepsService {
       await api.delete('api/keeps/' + id)
       this.getAllKeeps()
       await profilesService.getUserKeeps(AppState.account.id)
-      await vaultKeepsService.getKeepsByVaultId(vaultId)
+      if (vaultId) { await vaultKeepsService.getKeepsByVaultId(vaultId) }
     } catch (error) {
       logger.log(error)
     }
@@ -38,9 +37,7 @@ class KeepsService {
   async editKeepCount(id, editKeep) {
     try {
       editKeep.keeps++
-      const res = await api.put('api/keeps/' + id, editKeep)
-      console.log(res.data)
-      AppState.profileKeeps = res.data
+      await api.put('api/keeps/' + id, editKeep)
     } catch (error) {
       logger.log(error)
     }
@@ -48,9 +45,7 @@ class KeepsService {
 
   async editViewCount(id, editKeep) {
     editKeep.views++
-    const res = await api.put('api/keeps/' + id, editKeep)
-    console.log(res.data)
-    AppState.profileKeeps = res.data
+    await api.put('api/keeps/' + id, editKeep)
   }
 }
 

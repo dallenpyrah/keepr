@@ -59,12 +59,12 @@
                 />
               </div>
               <div class="form-group">
-                <h6>Tags</h6>
+                <h6>Tag</h6>
                 <input
                   type="text"
                   name="tags"
                   class="form-control"
-                  placeholder="Enter tags..."
+                  placeholder="Enter a tag..."
                   aria-describedby="helpId"
                   v-model="state.newKeep.tags"
                 />
@@ -102,7 +102,6 @@ export default {
       state,
       async createKeep() {
         console.log(state.newKeep)
-        state.newKeep.tags.split(',')
         await keepsService.createKeep(state.newKeep)
         await profilesService.getUserKeeps(state.account.id)
         state.newKeep = {}

@@ -10,10 +10,10 @@
         <div class="row w-100 justify-content-between">
           <div class="col-12 text-light">
             <div class="row justify-content-between">
-              <h6 class="keep-name text-light text-left ml-3">
+              <h6 class="keep-name animate__animated  animate__fadeInLeft text-light text-left ml-3">
                 {{ vaultProp.name }}
               </h6>
-              <i class="fa fa-lock mt-1" v-if="vaultProp.isPrivate" aria-hidden="true"></i>
+              <i class="fa fa-lock mt-1 animate__animated  animate__fadeInRight hover-icon-delete" v-if="vaultProp.isPrivate" aria-hidden="true"></i>
             </div>
           </div>
         </div>

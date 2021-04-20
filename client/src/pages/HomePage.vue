@@ -1,5 +1,5 @@
 <template>
-  <div v-if="state.keeps" class="container-fluid bg-white home">
+  <div class="container-fluid bg-white home">
     <div class="card-columns mt-1 ml-4 mr-4 ">
       <keep-component v-for="keep in state.keeps" :key="keep.id" :keep-prop="keep" />
     </div>
@@ -11,6 +11,7 @@ import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import KeepComponent from '../components/KeepComponent.vue'
 import { keepsService } from '../services/KeepsService'
+import 'animate.css'
 export default {
   components: { KeepComponent },
   name: 'Home',

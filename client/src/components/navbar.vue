@@ -108,15 +108,11 @@ export default {
         await AuthService.logout({ returnTo: window.location.origin })
       },
       async filterResult() {
-        await keepsService.filterKeeps()
+        AppState.keeps = AppState.keeps.filter(k => k.tags === state.tagQuery)
+        if (state.tagQuery === '' || null) {
+          await keepsService.getAllKeeps()
+        }
       }
-      // async filterResult() {
-      //   console.log('Hey')
-      //   AppState.keeps = AppState.keeps.filter(k => k.tags === state.tagQuery)
-      //   if (state.tagQuery === '' || null) {
-      //     await keepsService.getAllKeeps()
-      //   }
-      // }
     }
   }
 }

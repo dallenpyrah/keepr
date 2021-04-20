@@ -1,57 +1,30 @@
 <template>
   <keep-details-modal v-if="vaultProp" :keep-prop="keepProp" :vault-prop="vaultProp" />
   <keep-details-modal v-else :keep-prop="keepProp" />
-  <div class="container-fluid">
-    <div class="card-container keep" v-if="state.user.isAuthenticated" @click="getUserVaults">
+  <div v-if="state.keeps != []" class="container-fluid">
+    <div class="card-container keep" @click="getUserVaults">
       <div class="card rounded">
         <img
           class="card-img rounded"
           :src="keepProp.img"
           alt="Card image"
         >
-        <div class="card-img-overlay d-flex align-items-end">
-          <div @click="increaseViewCount"
-               class="card-img-overlay"
-               :data-target="`#view-keep` + keepProp.id"
-               data-toggle="modal"
-               aria-hidden="true"
+        <div @click="increaseViewCount" class="card-img-overlay d-flex align-items-end">
+          <div
+            class="card-img-overlay"
+            :data-target="`#view-keep` + keepProp.id"
+            data-toggle="modal"
+            aria-hidden="true"
           >
           </div>
           <div class="row w-100 justify-content-between">
             <div class="col-12 text-light">
               <div class="row justify-content-between">
-                <h6 class="keep-name text-left ml-3">
+                <h6 class="keep-name animate__animated  animate__fadeInLeft text-left ml-3">
                   {{ keepProp.name }}
                 </h6>
-                <i class="fa fa-user icon-size text-right text-light hover-icon" v-if="route.name == 'Home'" aria-hidden="true" @click="toProfilePage"></i>
-                <i class="fa fa-times-circle-o icon-size text-right text-light danger hover-icon" v-if="route.name == 'VaultPage' && keepProp.creator && state.user.email == keepProp.creator.email" @click="deleteKeep" aria-hidden="true"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card-container keep" v-else>
-      <div class="card rounded">
-        <img
-          class="card-img rounded"
-          :src="keepProp.img"
-          alt="Card image"
-        >
-        <div class="card-img-overlay d-flex align-items-end">
-          <div class="card-img-overlay"
-               :data-target="`#view-keep` + keepProp.id"
-               data-toggle="modal"
-               aria-hidden="true"
-          >
-          </div>
-          <div class="row w-100 justify-content-between">
-            <div class="col-12 text-light">
-              <div class="row justify-content-between">
-                <h6 class="keep-name text-left ml-3">
-                  {{ keepProp.name }}
-                </h6>
-                <i class="fa fa-user icon-size text-right text-light hover-icon" aria-hidden="true" @click="toProfilePage"></i>
+                <i class="fa fa-user icon-size text-right text-light animate__animated  animate__fadeInRight hover-icon" v-if="route.name == 'Home'" aria-hidden="true" @click="toProfilePage"></i>
+                <i class="fa fa-times-circle-o icon-size ml-icon text-right text-light animate__animated  animate__fadeInRight danger hover-icon-delete" v-if="route.name == 'VaultPage' && keepProp.creator && state.user.email == keepProp.creator.email" @click="deleteKeep" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -91,11 +64,15 @@ export default {
         router.push({ name: 'ProfilePage', params: { id: props.keepProp.creatorId } })
       },
       async getUserVaults() {
-        accountService.getAccount()
-        accountService.getAccountVaults(state.account.id)
+        if (state.user.isAuthenticated) {
+          accountService.getAccount()
+          accountService.getAccountVaults(state.account.id)
+        }
       },
       async increaseViewCount() {
-        await keepsService.editViewCount(props.keepProp.id, props.keepProp)
+        if (state.user.isAuthenticated) {
+          await keepsService.editViewCount(props.keepProp.id, props.keepProp)
+        }
       },
       deleteKeep() {
         keepsService.deleteKeep(props.keepProp.id, props.vaultProp.id)
@@ -121,6 +98,20 @@ export default {
   cursor: pointer;
 }
 .danger{
+  transition: all .25s;
+}
+.hover-icon:hover{
+  color: #41ffb6!important;
+  font-size: 30px;
+}
+.hover-icon{
+  transition: all .25s;
+}
+.hover-icon-delete:hover{
+  color: #ff4141!important;
+  font-size: 30px;
+}
+.hover-icon-delete{
   transition: all .25s;
 }
 </style>

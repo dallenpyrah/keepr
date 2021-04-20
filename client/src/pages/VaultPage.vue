@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row justify-content-center mt-4">
       <div class="col-11 ml-5 mt-4 mb-5">
-        <h1>{{ state.vault.name }}  <i class="fa fa-trash text-danger ml-3" v-if="state.vault.creator && state.user.email == state.vault.creator.email" @click="deleteVault" aria-hidden="true"></i></h1>
+        <h1><i class="fa fa-times text-dark hover-icon-delete mr-3" v-if="state.vault.creator && state.user.email == state.vault.creator.email" @click="deleteVault" aria-hidden="true"></i>{{ state.vault.name }}  </h1>
         <h4 class="mt-4">
           <span class="badge badge-success">Keeps {{ state.keeps.length }}</span>
         </h4>
@@ -39,6 +39,8 @@ export default {
     onMounted(() => vaultKeepsService.getKeepsByVaultId(route.params.id))
     onMounted(() => vaultsService.getVaultById(route.params.id))
     onBeforeRouteLeave((to, from, next) => {
+      AppState.vaultsKeeps = null
+      AppState.vault = null
       AppState.vaultPage = false
       next()
     })

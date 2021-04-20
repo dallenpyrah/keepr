@@ -9,10 +9,10 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content text-dark">
         <div class="row">
-          <div class="col-6">
+          <div class="col-5 animate__animated animate__fadeIn">
             <img class="img-fluid m-4 rounded" :src="keepProp.img">
           </div>
-          <div class="col-6 align-items-end text-center">
+          <div class="col-7 align-items-end text-center">
             <div class="row mt-4">
               <div class="col-11 text-right">
                 <i class="fa fa-times icon-size close" data-dismiss="modal" aria-label="Close"></i>
@@ -49,11 +49,11 @@
               </div>
             </div>
             <div class="row justify-content-center">
-              <div class="col-10 height-row">
+              <div class="col-11 height-row">
                 <div class="row justify-content-center">
                   <div class="col-xs-2 col-sm-6 col-md-6 col-lg-4 col-xl-4" v-if="state.user.isAuthenticated">
-                    <div class="dropup dropup">
-                      <button class="btn btn-success btn-sm dropdown-toggle dropright dropdown-text"
+                    <div class="dropup">
+                      <button class="btn btn-success btn-sm dropdown-toggle animate__animated  animate__bounceIn dropright dropdown-text"
                               type="button"
                               id="triggerId"
                               data-toggle="dropdown"
@@ -75,14 +75,14 @@
                   </div>
                   <div class="col-xs-2 col-sm-6 col-md-6 col-lg-4 col-xl-4" v-if="keepProp.creator && state.user.email == keepProp.creator.email">
                     <i v-if="state.vaultPage === false"
-                       class="fa fa-trash modal-delete"
+                       class="fa fa-trash modal-delete hover-icon-delete"
                        data-dismiss="modal"
                        aria-label="Close"
                        @click="deleteKeep"
                        aria-hidden="true"
                     ></i>
                     <i v-if="state.vaultPage === true"
-                       class="fa fa-trash modal-delete text-danger"
+                       class="fa fa-trash modal-delete text-warning hover-icon-delete"
                        data-dismiss="modal"
                        aria-label="Close"
                        @click="deleteVaultKeep"
@@ -99,7 +99,7 @@
                            @click="toProfilePage"
                            :src="keepProp.creator.picture"
                       >
-                      <span class="ml-3">{{ keepProp.name }}</span>
+                      <span class="ml-3 animate__animated animate__fadeInRight">{{ keepProp.creator.name }}</span>
                     </div>
                   </div>
                   <div v-else class="ml-5 col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
@@ -110,7 +110,7 @@
                            @click="toProfilePage"
                            :src="keepProp.creator.picture"
                       >
-                      <span class="ml-3">{{ keepProp.name }}</span>
+                      <span class="ml-3 animate__animated animate__fadeInRight">{{ keepProp.creator.name }}</span>
                     </div>
                   </div>
                 </div>
@@ -131,6 +131,7 @@ import { keepsService } from '../services/KeepsService'
 import Swal from 'sweetalert2'
 import router from '../router'
 import { vaultKeepsService } from '../services/VaultKeepsService'
+import 'animate.css'
 export default {
   components: { VaultDropDown },
   name: 'KeepDetailsModal',
@@ -195,7 +196,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .rounded{
   border-radius: .75rem!important;
 }
@@ -212,5 +213,12 @@ export default {
 .dropdown-menu {
  overflow-y:auto;
  max-height:80vh
+}
+.hover-icon-delete:hover{
+  color: #ff4141!important;
+  font-size: 40px;
+}
+.hover-icon-delete{
+  transition: all .25s;
 }
 </style>

@@ -10,7 +10,8 @@
           alt="Card image"
         >
         <div class="card-img-overlay d-flex align-items-end">
-          <div class="card-img-overlay"
+          <div @click="increaseViewCount"
+               class="card-img-overlay"
                :data-target="`#view-keep` + keepProp.id"
                data-toggle="modal"
                aria-hidden="true"
@@ -23,7 +24,7 @@
                   {{ keepProp.name }}
                 </h6>
                 <i class="fa fa-user icon-size text-right text-light hover-icon" v-if="route.name == 'Home'" aria-hidden="true" @click="toProfilePage"></i>
-                <i class="fa fa-times-circle-o icon-size text-right text-light danger hover-icon" v-if="route.name == 'VaultPage' " @click="deleteKeep" aria-hidden="true"></i>
+                <i class="fa fa-times-circle-o icon-size text-right text-light danger hover-icon" v-if="route.name == 'VaultPage' && keepProp.creator && state.user.email == keepProp.creator.email" @click="deleteKeep" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -92,6 +93,9 @@ export default {
       async getUserVaults() {
         accountService.getAccount()
         accountService.getAccountVaults(state.account.id)
+      },
+      async increaseViewCount() {
+        await keepsService.editViewCount(props.keepProp.id, props.keepProp)
       },
       deleteKeep() {
         keepsService.deleteKeep(props.keepProp.id, props.vaultProp.id)

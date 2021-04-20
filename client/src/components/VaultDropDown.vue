@@ -1,5 +1,5 @@
 <template>
-  <button @click="addKeepToVault" class="dropdown-item" href="#">
+  <button @click="addKeepToVault" class="dropdown-item badge badge-success" href="#">
     {{ vaultProp.name }}  <i class="fa fa-lock" v-if="vaultProp.isPrivate === true" aria-hidden="true"></i>
   </button>
 </template>

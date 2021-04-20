@@ -22,6 +22,8 @@ namespace server.Models
 
         public int Keeps { get; set; }
 
+        public string Tags { get; set; }
+
         public Profile Creator { get; set; }
     }
 

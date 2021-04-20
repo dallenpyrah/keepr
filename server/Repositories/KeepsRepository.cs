@@ -52,9 +52,9 @@ namespace server.Repositories
         {
             string sql = @"
             INSERT INTO keeps
-            (name, description, img, creatorId)
+            (name, description, img, creatorId, tags)
             VALUES
-            (@Name, @Description, @Img, @CreatorId);
+            (@Name, @Description, @Img, @CreatorId, @Tags);
             SELECT LAST_INSERT_ID();";
             int id = _db.ExecuteScalar<int>(sql, newKeep);
             newKeep.Id = id;
@@ -68,7 +68,8 @@ namespace server.Repositories
                 name = @Name,
                 description = @Description,
                 img = @Img,
-                keeps = @Keeps
+                keeps = @Keeps,
+                views = @Views
                 WHERE id = @id;";
             return _db.QueryFirstOrDefault<Keep>(sql, editKeep);
         }

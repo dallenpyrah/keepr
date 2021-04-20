@@ -23,10 +23,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <div class="col-4 mr-auto ml-auto">
-        <form @submit.prevent="">
+        <form @submit.prevent="filterResult">
           <div class="form-group mt-3">
             <div class="input-group">
-              <input type="text" class="form-control form-control-lg border-right-0" placeholder="From" aria-label="from" aria-describedby="from">
+              <input type="text"
+                     class="form-control form-control-lg border-right-0"
+                     placeholder="From"
+                     aria-label="from"
+                     aria-describedby="from"
+                     v-model="state.tagQuery"
+              >
               <div class="input-group-append">
                 <span class="input-group-text bg-white"><i class="fa fa-search" aria-hidden="true"></i></span>
               </div>
@@ -61,7 +67,7 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'ProfilePage', params: { id: state.account.id} }">
+            <router-link :to="{ name: 'Account', params: { id: state.account.id} }">
               <div class="list-group-item list-group-item-action hoverable">
                 Account
               </div>
@@ -83,12 +89,14 @@
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
+import { keepsService } from '../services/KeepsService'
 export default {
   name: 'Navbar',
   setup() {
     const state = reactive({
       account: computed(() => AppState.account),
-      dropOpen: false
+      dropOpen: false,
+      tagQuery: ''
     })
     return {
       state,
@@ -98,7 +106,17 @@ export default {
       },
       async logout() {
         await AuthService.logout({ returnTo: window.location.origin })
+      },
+      async filterResult() {
+        await keepsService.filterKeeps()
       }
+      // async filterResult() {
+      //   console.log('Hey')
+      //   AppState.keeps = AppState.keeps.filter(k => k.tags === state.tagQuery)
+      //   if (state.tagQuery === '' || null) {
+      //     await keepsService.getAllKeeps()
+      //   }
+      // }
     }
   }
 }

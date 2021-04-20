@@ -23,6 +23,7 @@ CREATE TABLE keeps
     views INT DEFAULT 0,
     shares INT DEFAULT 0,
     keeps INT DEFAULT 0,
+    tags VARCHAR(255),
 
     PRIMARY KEY (id),
 

@@ -101,6 +101,8 @@ export default {
     return {
       state,
       async createKeep() {
+        console.log(state.newKeep)
+        state.newKeep.tags.split(',')
         await keepsService.createKeep(state.newKeep)
         await profilesService.getUserKeeps(state.account.id)
         state.newKeep = {}

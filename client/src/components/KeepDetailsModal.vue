@@ -41,6 +41,13 @@
                 </p>
               </div>
             </div>
+            <div class="row justify-content-center margin-top-description">
+              <div class="col-10">
+                <span class="text-size-description badge badge-success">
+                  {{ keepProp.tags }}
+                </span>
+              </div>
+            </div>
             <div class="row justify-content-center">
               <div class="col-10 height-row">
                 <div class="row justify-content-center">

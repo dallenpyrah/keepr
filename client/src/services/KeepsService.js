@@ -45,6 +45,13 @@ class KeepsService {
       logger.log(error)
     }
   }
+
+  async editViewCount(id, editKeep) {
+    editKeep.views++
+    const res = await api.put('api/keeps/' + id, editKeep)
+    console.log(res.data)
+    AppState.profileKeeps = res.data
+  }
 }
 
 export const keepsService = new KeepsService()

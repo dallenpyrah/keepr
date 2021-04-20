@@ -89,8 +89,8 @@ namespace server.Controllers
             try
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-               _kservice.DeleteOne(id, userInfo.Id);
-               return Ok("Deleted");
+                _kservice.DeleteOne(id, userInfo.Id);
+                return Ok("Deleted");
             }
             catch (System.Exception err)
             {

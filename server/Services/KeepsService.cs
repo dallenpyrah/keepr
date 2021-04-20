@@ -52,6 +52,10 @@ namespace server.Services
                 {
                     editKeep.Keeps = editKeep.Keeps > 0 ? editKeep.Keeps : current.Keeps;
                 }
+                 if (editKeep.Views > 0)
+                {
+                    editKeep.Views = editKeep.Views > 0 ? editKeep.Views : current.Views;
+                }
                 else
                 {
 

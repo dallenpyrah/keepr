@@ -101,7 +101,10 @@ export default {
     return {
       state,
       async createKeep() {
-        console.log(state.newKeep)
+        const str = state.newKeep.tags
+        const res = str.toUpperCase()
+        state.newKeep.tags = res
+        console.log(state.newKeep.tags)
         await keepsService.createKeep(state.newKeep)
         await profilesService.getUserKeeps(state.account.id)
         state.newKeep = {}

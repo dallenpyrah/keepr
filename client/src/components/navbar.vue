@@ -108,6 +108,9 @@ export default {
         await AuthService.logout({ returnTo: window.location.origin })
       },
       async filterResult() {
+        const str = state.tagQuery
+        const res = str.toUpperCase()
+        state.tagQuery = res
         AppState.keeps = AppState.keeps.filter(k => k.tags === state.tagQuery)
         if (state.tagQuery === '' || null) {
           await keepsService.getAllKeeps()

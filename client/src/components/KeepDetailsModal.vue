@@ -7,7 +7,7 @@
        aria-hidden="true"
   >
     <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content text-dark">
+      <div class="flex-grow-1 d-flex modal-content text-dark">
         <div class="row">
           <div class="col-5 animate__animated animate__fadeIn">
             <img class="img-fluid m-4 rounded" :src="keepProp.img">
@@ -41,14 +41,14 @@
                 </p>
               </div>
             </div>
-            <div class="row justify-content-center margin-top-description">
+            <div class="row justify-content-center">
               <div class="col-10">
                 <span class="text-size-description badge badge-success">
                   {{ keepProp.tags }}
                 </span>
               </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mt-buttons">
               <div class="col-11 height-row">
                 <div class="row justify-content-center">
                   <div class="col-xs-2 col-sm-6 col-md-6 col-lg-4 col-xl-4" v-if="state.user.isAuthenticated">
@@ -110,7 +110,7 @@
                            @click="toProfilePage"
                            :src="keepProp.creator.picture"
                       >
-                      <span class="ml-3 animate__animated animate__fadeInRight">{{ keepProp.creator.name }}</span>
+                      <span class="ml-3 animate__animated animate__fadeInRight ">{{ keepProp.creator.name }}</span>
                     </div>
                   </div>
                 </div>
@@ -197,6 +197,9 @@ export default {
 </script>
 
 <style scoped>
+.mt-buttons{
+  margin-top: 5rem;
+}
 .rounded{
   border-radius: .75rem!important;
 }

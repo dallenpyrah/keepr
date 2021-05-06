@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+    <router-link @click="getAllKeeps" class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <img
           class="old-hover"
@@ -106,6 +106,9 @@ export default {
       },
       async logout() {
         await AuthService.logout({ returnTo: window.location.origin })
+      },
+      async getAllKeeps() {
+        await keepsService.getAllKeeps()
       },
       async filterResult() {
         const str = state.tagQuery

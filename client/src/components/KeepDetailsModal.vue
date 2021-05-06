@@ -198,7 +198,7 @@ export default {
 
 <style scoped>
 .mt-buttons{
-  margin-top: 5rem;
+  margin-top: 10rem;
 }
 .rounded{
   border-radius: .75rem!important;

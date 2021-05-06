@@ -41,6 +41,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { accountService } from '../services/AccountService'
 import { keepsService } from '../services/KeepsService'
+import { vaultKeepsService } from '../services/VaultKeepsService'
+import Swal from 'sweetalert2'
 export default {
   components: { KeepDetailsModal },
   name: 'KeepComponent',
@@ -75,7 +77,23 @@ export default {
         }
       },
       deleteKeep() {
-        keepsService.deleteKeep(props.keepProp.id, props.vaultProp.id)
+        Swal.fire({
+          title: 'Are you sure you want to remove this keep from your vault?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, remove it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            vaultKeepsService.deleteVaultKeep(props.keepProp.vaultKeepId, props.vaultProp.id)
+            Swal.fire(
+              'Removed!',
+              'Your keep has been removed.',
+              'success'
+            )
+          }
+        })
       }
     }
   }

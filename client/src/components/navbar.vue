@@ -23,7 +23,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <div class="col-4 mr-auto ml-auto">
-        <form @submit.prevent="filterResult">
+        <form v-if="route.name == 'Home'" @submit.prevent="filterResult">
           <div class="form-group mt-3">
             <div class="input-group">
               <input type="text"
@@ -90,9 +90,11 @@ import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
 import { keepsService } from '../services/KeepsService'
+import { useRoute } from 'vue-router'
 export default {
   name: 'Navbar',
   setup() {
+    const route = useRoute()
     const state = reactive({
       account: computed(() => AppState.account),
       dropOpen: false,
@@ -100,6 +102,7 @@ export default {
     })
     return {
       state,
+      route,
       user: computed(() => AppState.user),
       async login() {
         AuthService.loginWithPopup()
